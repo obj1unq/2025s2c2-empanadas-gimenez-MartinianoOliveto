@@ -10,23 +10,38 @@ object galvan {
     method sueldo(){
         return sueldo
     }
+    method deuda(){
+        return deuda 
+    }
+    method dinero(){
+        return dinero 
+    }
 //cuando gasta, se le resta de su dinero
 // si no le alcanza, aumenta la deuda 
 //si sobra, se suma a su dinero
     method gastar(cantidad){
-        if(cantidad > dinero){
-            deuda = deuda + cantidad - dinero 
+        if (cantidad >= dinero){
+            deuda = deuda + cantidad - dinero
+            dinero = 0
         }
-        else{
+        else {
             dinero = dinero - cantidad 
         }
     }
-    method dinero(){
-        return dinero
+    method cobrar(){
+        dinero = dinero + sueldo 
     }
-    method deuda(){
-        return deuda 
+    method pagarDeuda(){
+        if (deuda >= dinero){
+            deuda = deuda - dinero 
+            dinero = 0
+        }
+        else{
+            dinero = dinero - deuda 
+            deuda = 0 
+        }
     }
+   
 }
 object baigorria {
     //var sueldo = cantidadEmpanadasVendidas * 15
