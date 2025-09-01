@@ -30,6 +30,7 @@ object galvan {
     }
     method cobrar(){
         dinero = dinero + sueldo 
+        self.pagarDeuda()
     }
     method pagarDeuda(){
         if (deuda >= dinero){
@@ -44,7 +45,6 @@ object galvan {
    
 }
 object baigorria {
-    //var sueldo = cantidadEmpanadasVendidas * 15
     var cantidadEmpanadasVendidas = 0  
     var totalCobrado = 0 
 
@@ -72,8 +72,9 @@ object gimenez {
 
     method pagarSueldo(empleado){
         fondoSueldos = fondoSueldos - empleado.sueldo()
+        empleado.cobrar()
     }
-    method importeActual(){
+    method fondoActual(){
         return fondoSueldos
     }
 }
