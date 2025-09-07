@@ -71,10 +71,25 @@ object gimenez {
     var fondoSueldos = 300000
 
     method pagarSueldo(empleado){
+        self.validarPago(empleado)
         fondoSueldos = fondoSueldos - empleado.sueldo()
         empleado.cobrar()
     }
     method fondoActual(){
         return fondoSueldos
+    }
+
+//se usara un setter para cambiar los fondos de gimenez, solamente para hacer la validacion 
+    method fondosGimenez(cantidad){
+        fondoSueldos = cantidad 
+    }
+    method impuestos(){
+        fondoSueldos = 0
+    }
+//validacion 
+    method validarPago(empleado){
+        if(empleado.sueldo() > self.fondoActual()){
+            self.error("No puede pagar " + empleado.sueldo() + " no hay dinero suficiente")
+        }
     }
 }

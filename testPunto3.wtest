@@ -1,28 +1,73 @@
 import empleados.*
 
-test "punto1: Finanzas de  galvan" {
-
+test "Caso 1"{
    assert.equals(0, galvan.deuda()) 	
    assert.equals(0, galvan.dinero()) 	
-   assert.equals(15000, galvan.sueldo()) 	
+   assert.equals(15000, galvan.sueldo())
 
-   galvan.gastar(4000)
+}
+describe "Caso 2"{
+   method initialize(){
+      galvan.gastar(4000)
+   }
+test "Caso 2"{
    assert.equals(4000, galvan.deuda()) 	
    assert.equals(0, galvan.dinero()) 	
-   
+   }
+}
+describe "Caso 3"{
+   method initialize(){
    galvan.gastar(8000)
    assert.equals(12000, galvan.deuda()) 	
+   }
+test "Caso 3"{
    assert.equals(0, galvan.dinero()) 	
-
+   }
+}
+describe "Caso 4"{
+   method initialize(){
    gimenez.pagarSueldo(galvan)   
    assert.equals(0, galvan.deuda()) 	
+   }
+test "Caso 4"{
    assert.equals(3000, galvan.dinero()) 	
-
-   galvan.gastar(25000)
-   assert.equals(22000, galvan.deuda()) 	
-   assert.equals(0, galvan.dinero()) 	
-
-   gimenez.pagarSueldo(galvan)   
+   }
+}
+describe "Caso 5"{
+   method initialize(){
+   galvan.gastar(25000)	 
+   }
+test "Caso 5"{
+   assert.equals(22000, galvan.deuda()) 
+   }
+}
+describe "Caso 6"{
+   method initialize(){
+   gimenez.pagarSueldo(galvan)  
+   }
+test "Caso 6"{
    assert.equals(7000, galvan.deuda()) 	
-   assert.equals(0, galvan.dinero()) 	
+   assert.equals(0, galvan.dinero())
+   }
+}
+//casos para probar la validacion 
+//Caso 1: Argensimia fundio a gimenez con impuestos; no puede pagar sueldos.
+describe"Caso 1 validacion"{
+   method initialize(){
+      gimenez.impuestos()
+      gimenez.pagarSueldo(galvan)
+   }
+test "Caso 1"{
+   assert.equals(15000, galvan.sueldo())
+   }
+}
+//Caso 2: galvan cobra un sueldo minimo, gimenez no puede pagarlo
+describe "Caso 2 validacion"{
+   method initialize(){
+      galvan.cambioSueldo(322000)
+      gimenez.pagarSueldo(galvan)
+   }
+test "Caso 2"{
+   assert.equals(322000, galvan.sueldo())
+   }
 }
